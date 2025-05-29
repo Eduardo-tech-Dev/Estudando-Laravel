@@ -5,40 +5,28 @@
 
 @section('content')
 
-
-    <h1>Algum título</h1>
-    <img src="/img/banner.jpg" alt="Banner">
-
-    @if (10 > 5 )
-    <p>A condição é true</p>
-    @endif
-
-    <p>{{ $nome }}</p>
-
-    @if ($nome == "Pedro")
-        <p>O nome é Pedro</p>
-    @elseif ($nome == "Eduardo")
-        <p>O nome é {{  $nome  }} e ele tem {{ $idade }} anos, e a profissão é {{ $profissao }}</p>
-    @else
-        <p>O nome não é Pedro</p>
-    @endif
-
-    @for ($i = 0; $i < count($arr); $i++)
-        <p>{{ $arr[$i] }} - {{ $i }}</p>
-        @if ($i == 2)
-        <p> o i é 2</p>
-        @endif
-    @endfor
-
-    @foreach ($nomes  as $nome)
-    <p> {{ $loop->index }}</p>
-    <p>{{ $nome }}</p>
-
-    @endforeach
-
-    @php
-        $name = "Eduardo";
-        echo $name;
-    @endphp
+<div id="search-container" class="col-md-12">
+    <h1>Busque uma Aula</h1>
+    <form action="">
+        <input type="text" name="search" id="search" class="form-control" placeholder="Procurar...">
+    </form>
+</div>
+<div id="aulas-container" class="col-md-12">
+    <h2>Próximoas Aulas</h2>
+    <p class="subtitle">Veja as Aulas dos próximos dias</p>
+    <div id="cards-container" class="row">
+        @foreach($aulas as $aula)
+        <div class="card col-md-3">
+            <img src="/img/banner.jpg" alt="{{  $aula->title }}">
+            <div class="card-body">
+                <p class="card-date">27/05/2025</p>
+                <h5 class="card-title">{{ $aula->title}}</h5>
+                <p class="card-participantes">X participantes</p>
+                <a href="#"  class="btn btn-primary">Saber mais</a>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
 
 @endsection

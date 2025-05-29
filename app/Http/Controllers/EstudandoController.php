@@ -4,27 +4,34 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+USE App\Models\Aula;
+
 class EstudandoController extends Controller
 {
     public function index()
     {
-        $nome = "Eduardo";
-    $idade = 22;
+        $aulas = Aula::all();
 
-
-    $arr = [ 10,20,30,40,50];
-    $nomes = ['Eduardo', 'Gustavo', 'Athilla', 'Joao'];
-
-    return view('welcome',
-    ['nome' => $nome,
-    'idade' => $idade ,
-     'profissao' => 'Programador',
-     'arr' => $arr,
-     'nomes' => $nomes,
-    ]);
+    return view('welcome', ['aulas' => $aulas]);
     }
 
     public function create() {
         return view('aula.create');
+    }
+
+    public function store(Request $request){
+
+        $aula = new Aula();
+
+        $aula->title = $request->title;
+        $aula->private = $request->private;
+        $aula->description = $request->description;
+
+        $aula->save();
+
+        return redirect('/');
+
+
+
     }
 }
